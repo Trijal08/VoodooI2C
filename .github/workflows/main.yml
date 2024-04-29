@@ -28,7 +28,7 @@ jobs:
         with:
           python-version: '3.7'
       - name: Install Python dependencies
-        run: pip install cpplint git+https://github.com/VoodooI2C/cldoc.git
+        run: pip install cpplint git+https://github.com/newperson1746/cldoc-fix.git
       - name: CI Bootstrap
         run: |
           src=$(/usr/bin/curl -Lfs https://raw.githubusercontent.com/acidanthera/ocbuild/master/ci-bootstrap.sh) && eval "$src" || exit 1
