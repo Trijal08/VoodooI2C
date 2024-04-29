@@ -26,7 +26,7 @@ jobs:
           path: MacKernelSDK
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.7'
       - name: Install Python dependencies
         run: pip install cpplint git+https://github.com/VoodooI2C/cldoc.git
       - name: CI Bootstrap
