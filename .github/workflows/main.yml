@@ -32,6 +32,9 @@ jobs:
       - name: CI Bootstrap
         run: |
           src=$(/usr/bin/curl -Lfs https://raw.githubusercontent.com/acidanthera/ocbuild/master/ci-bootstrap.sh) && eval "$src" || exit 1
+      - name: VoodooInput Bootstrap
+        run: |
+          src=$(/usr/bin/curl -Lfs https://raw.githubusercontent.com/acidanthera/VoodooInput/master/VoodooInput/Scripts/bootstrap.sh) && eval "$src" && mv VoodooInput Dependencies || exit 1
 
       - run: xcodebuild -workspace "VoodooI2C.xcworkspace" -scheme "VoodooI2C" -jobs 1 -configuration Debug
       - run: xcodebuild -workspace "VoodooI2C.xcworkspace" -scheme "VoodooI2C" -jobs 1 -configuration Release
