@@ -36,11 +36,12 @@ jobs:
         run: |
           src=$(/usr/bin/curl -Lfs https://raw.githubusercontent.com/acidanthera/VoodooInput/master/VoodooInput/Scripts/bootstrap.sh) && eval "$src" && mv VoodooInput Dependencies || exit 1
 
+      - run: print ${CONFIGURATION_BUILD_DIR}
       - run: xcodebuild -workspace "VoodooI2C.xcworkspace" -scheme "VoodooI2C" -jobs 1 -configuration Debug
       - run: xcodebuild -workspace "VoodooI2C.xcworkspace" -scheme "VoodooI2C" -jobs 1 -configuration Release
 
       - name: Upload to Artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: Artifacts
           path: build/*/*.zip
