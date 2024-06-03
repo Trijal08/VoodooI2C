@@ -658,7 +658,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cpplint --recursive --filter=-build/include_subdir,-build/header_guard,-whitespace/line_length,-runtime/int ./\n";
+			shellScript = "#cpplint --recursive --filter=-build/include_subdir,-build/header_guard,-whitespace/line_length,-runtime/int ./VoodooI2C\n";
 		};
 		ACA4A00F21E25F3500A91B61 /* Generate Documentation */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -694,7 +694,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Taken from Acidanthera's VoodooPS2\ncd \"${TARGET_BUILD_DIR}\"\n\ndist=(\"$FULL_PRODUCT_NAME\")\n\n# Copy dsyms into directory\nif [ -d \"$DWARF_DSYM_FILE_NAME\" ]; then\n  rm -rf dSYM\n  mkdir dSYM\n  mv \"$DWARF_DSYM_FILE_NAME\" dSYM/\n  find ${FULL_PRODUCT_NAME} -name *.dSYM -exec mv {} dSYM/ \\;\n  dist+=(dSYM);\nfi\n\n# Create ZIP with dsyms and resulting kexts\narchive=\"${PRODUCT_NAME}-${MODULE_VERSION}-$(echo $CONFIGURATION | tr /a-z/ /A-Z/).zip\"\nrm -rf *.zip\nzip -qry -FS \"${archive}\" \"${dist[@]}\"\n";
+			shellScript = "# Taken from Acidanthera's VoodooPS2\ncd \"${TARGET_BUILD_DIR}\"\n\ndist=(\"$FULL_PRODUCT_NAME\")\n\n# Add all kexts to zip\nfor kext in *.kext; do\n  dist+=(\"$kext\")\ndone\n\n# Copy dsyms into directory\nif [ \"$CONFIGURATION\" = \"RELEASE\" ]; then\n  rm -rf dSYM\n  mkdir dSYM\n  \n  for dsym in *.dSYM; do\n    mv \"$dsym\" dSYM/\n    >&2 echo \"$dsym\"\n    find ${FULL_PRODUCT_NAME} -name *.dSYM -exec mv {} dSYM/ \\;\n    dist+=(\"$dsym\")\n  done\nfi\n\n# Create ZIP with dsyms and resulting kexts\narchive=\"${PRODUCT_NAME}-${MODULE_VERSION}-$(echo $CONFIGURATION | tr /a-z/ /A-Z/).zip\"\nrm -rf *.zip\nzip -qry -FS \"${archive}\" \"${dist[@]}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
