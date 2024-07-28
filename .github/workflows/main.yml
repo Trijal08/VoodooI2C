@@ -17,18 +17,18 @@ jobs:
     env:
       JOB_TYPE: BUILD
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.7
         with:
           submodules: recursive
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.7
         with:
           repository: acidanthera/MacKernelSDK
           path: MacKernelSDK
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5.1.1
         with:
-          python-version: '3.12'
+          python-version: '3.12.4'
       - name: Install Python dependencies
-        run: pip install cpplint git+https://github.com/doedre/cldoc.git
+        run: pip install cpplint git+https://github.com/newperson1746/cldoc-fix.git
       - name: CI Bootstrap
         run: |
           src=$(/usr/bin/curl -Lfs https://raw.githubusercontent.com/acidanthera/ocbuild/master/ci-bootstrap.sh) && eval "$src" || exit 1
@@ -36,11 +36,10 @@ jobs:
         run: |
           src=$(/usr/bin/curl -Lfs https://raw.githubusercontent.com/acidanthera/VoodooInput/master/VoodooInput/Scripts/bootstrap.sh) && eval "$src" && mv VoodooInput Dependencies || exit 1
 
-      - run: xcodebuild -workspace "VoodooI2C.xcworkspace" -scheme "VoodooI2C" -jobs 1 -configuration Debug
-      - run: xcodebuild -workspace "VoodooI2C.xcworkspace" -scheme "VoodooI2C" -jobs 1 -configuration Release
+      - run: xcodebuild -workspace "VoodooI2C.xcworkspace" -scheme "VoodooI2C" -derivedDataPath build clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -jobs 1
 
       - name: Upload to Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.3.4
         with:
           name: Artifacts
           path: build/Build/Products/Release
