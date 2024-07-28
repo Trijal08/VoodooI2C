@@ -28,7 +28,7 @@ jobs:
         with:
           python-version: '3.12.4'
       - name: Install Python dependencies
-        run: pip3 install cpplint git+https://github.com/newperson1746/cldoc-fix.git
+        run: pip3 install cpplint git+https://github.com/VoodooI2C/cldoc.git
       - name: CI Bootstrap
         run: |
           src=$(/usr/bin/curl -Lfs https://raw.githubusercontent.com/acidanthera/ocbuild/master/ci-bootstrap.sh) && eval "$src" || exit 1
@@ -43,7 +43,7 @@ jobs:
         uses: actions/upload-artifact@v4.3.4
         with:
           name: Artifacts
-          path: build/*/*.zip
+          path: ./build/*/*.zip
       - name: Upload to Release
         if: github.event_name == 'release'
         uses: svenstaro/upload-release-action@1beeb572c19a9242f4361f4cee78f8e0d9aec5df
