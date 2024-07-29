@@ -7,6 +7,7 @@
 
 #include "VoodooI2CController.hpp"
 #include "VoodooI2CControllerNub.hpp"
+#include <iostream>
 
 // Log only if current thread is interruptible, otherwise we will get a panic.
 #define TryLog(args...) do { if (ml_get_interrupts_enabled()) IOLog(args); } while (0)
