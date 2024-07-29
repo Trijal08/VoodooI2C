@@ -19,7 +19,7 @@
 #define kACPIDevicePathKey "acpi-path"
 #endif
 
-typedef struct {
+struct VoodooI2CControllerPhysicalDevice {
     IOACPIPlatformDevice* acpi_device;
     bool awake = true;
     const char* name;
