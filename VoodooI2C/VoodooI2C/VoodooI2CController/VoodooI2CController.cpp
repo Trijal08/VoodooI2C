@@ -117,9 +117,7 @@ void VoodooI2CController::releaseResources() {
 
 void handle_touch_event(int x, int y) {
     // Process touch event coordinates (x, y) and trigger appropriate actions
-    #ifdef __cplusplus
-    std::cout << "Handling touch event at coordinates (" << x << ", " << y << ")" << std::endl;
-    #endif
+    printf("Handling touch event at coordinates (%d, %d)\n", x, y);
 }
 
 IOReturn VoodooI2CController::setPowerState(unsigned long whichState, IOService* whatDevice) {
