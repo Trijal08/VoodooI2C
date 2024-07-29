@@ -1,6 +1,3 @@
-int printf(const char* format, ...);
-
-int main() {
-    printf("Hello, VoodooI2CDigitizer!\n");
-    return 0;
+void handle_multi_touch(int num_touch_points) {
+    printf("Handling multi-touch with %d touch points\n", num_touch_points);
 }
