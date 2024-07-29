@@ -7,7 +7,6 @@
 
 #include "VoodooI2CController.hpp"
 #include "VoodooI2CControllerNub.hpp"
-#include <cstdio>
 
 // Log only if current thread is interruptible, otherwise we will get a panic.
 #define TryLog(args...) do { if (ml_get_interrupts_enabled()) IOLog(args); } while (0)
@@ -118,7 +117,9 @@ void VoodooI2CController::releaseResources() {
 
 void handle_touch_event(int x, int y) {
     // Process touch event coordinates (x, y) and trigger appropriate actions
-    printf("Handling touch event at coordinates (%d, %d)\n", x, y);
+    #ifdef __cplusplus
+    std::cout << "Handling touch event at coordinates (" << x << ", " << y << ")" << std::endl;
+    #endif
 }
 
 IOReturn VoodooI2CController::setPowerState(unsigned long whichState, IOService* whatDevice) {
